@@ -10,23 +10,23 @@ source:
 
 build:
   number: 0
-  skip: true  # [(win  and py27) or win32]
+  skip: true  # [(win and py<36) or win32]
 
 requirements:
   build:
     - toolchain
     - cmake
-    - pagmo     2.4
-    - pygmo     2.4
-    - boost     1.63.*
+    - pagmo     2.5
+    - pygmo     2.5
+    - boost     1.65.1
     - numpy     x.x
     - cloudpickle
     - ipyparallel
     - python
   run:
-    - pagmo     2.4
-    - pygmo     2.4
-    - boost     1.63.*
+    - pagmo     2.5
+    - pygmo     2.5
+    - boost     1.65.1
     - numpy     x.x
     - cloudpickle
     - ipyparallel
