@@ -16,16 +16,16 @@ requirements:
   build:
     - toolchain
     - cmake
-    - pagmo     2.5
-    - pygmo     2.5
+    - pagmo     2.6
+    - pygmo     2.6
     - boost     1.65.1
     - numpy     x.x
     - cloudpickle
     - ipyparallel
     - python
   run:
-    - pagmo     2.5
-    - pygmo     2.5
+    - pagmo     2.6
+    - pygmo     2.6
     - boost     1.65.1
     - numpy     x.x
     - cloudpickle
