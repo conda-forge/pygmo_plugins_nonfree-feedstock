@@ -9,24 +9,24 @@ source:
   sha256: 66a6793598653f33fb331e8ed2e9e582fcf44b3bfb23229ebd81bb892542bb6a
 
 build:
-  number: 0
-  skip: true  # [(win  and py27) or win32]
+  number: 2
+  skip: true  # [(win and py<36) or win32]
 
 requirements:
   build:
     - toolchain
     - cmake
-    - pagmo     2.4
-    - pygmo     2.4
-    - boost     1.63.*
+    - pagmo     2.6
+    - pygmo     2.6
+    - boost     1.66.0
     - numpy     x.x
     - cloudpickle
     - ipyparallel
     - python
   run:
-    - pagmo     2.4
-    - pygmo     2.4
-    - boost     1.63.*
+    - pagmo     2.6
+    - pygmo     2.6
+    - boost     1.66.0
     - numpy     x.x
     - cloudpickle
     - ipyparallel
