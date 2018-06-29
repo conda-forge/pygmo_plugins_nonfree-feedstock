@@ -14,20 +14,23 @@ build:
 
 requirements:
   build:
-    - toolchain
     - cmake
+    - {{ compiler('fortran') }}
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
     - pagmo     2.6
     - pygmo     2.6
-    - boost     1.66.0
-    - numpy     x.x
+    - boost
+    - numpy
     - cloudpickle
     - ipyparallel
     - python
   run:
     - pagmo     2.6
     - pygmo     2.6
-    - boost     1.66.0
-    - numpy     x.x
+    - boost
+    - {{ pin_compatible('numpy') }}
     - cloudpickle
     - ipyparallel
     - python
