@@ -14,14 +14,16 @@ Summary: A package affiliated to pagmo/pygmo and providing additional solvers in
 Current build status
 ====================
 
-Linux: [![Circle CI](https://circleci.com/gh/conda-forge/pygmo_plugins_nonfree-feedstock.svg?style=shield)](https://circleci.com/gh/conda-forge/pygmo_plugins_nonfree-feedstock)
-OSX: [![TravisCI](https://travis-ci.org/conda-forge/pygmo_plugins_nonfree-feedstock.svg?branch=master)](https://travis-ci.org/conda-forge/pygmo_plugins_nonfree-feedstock)
-Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/conda-forge/pygmo_plugins_nonfree-feedstock?svg=True)](https://ci.appveyor.com/project/conda-forge/pygmo-plugins-nonfree-feedstock/branch/master)
+[![Linux](https://img.shields.io/circleci/project/github/conda-forge/pygmo_plugins_nonfree-feedstock/master.svg?label=Linux)](https://circleci.com/gh/conda-forge/pygmo_plugins_nonfree-feedstock)
+[![OSX](https://img.shields.io/travis/conda-forge/pygmo_plugins_nonfree-feedstock/master.svg?label=macOS)](https://travis-ci.org/conda-forge/pygmo_plugins_nonfree-feedstock)
+[![Windows](https://img.shields.io/appveyor/ci/conda-forge/pygmo_plugins_nonfree-feedstock/master.svg?label=Windows)](https://ci.appveyor.com/project/conda-forge/pygmo-plugins-nonfree-feedstock/branch/master)
 
 Current release info
 ====================
-Version: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/pygmo_plugins_nonfree/badges/version.svg)](https://anaconda.org/conda-forge/pygmo_plugins_nonfree)
-Downloads: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/pygmo_plugins_nonfree/badges/downloads.svg)](https://anaconda.org/conda-forge/pygmo_plugins_nonfree)
+
+| Name | Downloads | Version | Platforms |
+| --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-pygmo_plugins_nonfree-green.svg)](https://anaconda.org/conda-forge/pygmo_plugins_nonfree) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/pygmo_plugins_nonfree.svg)](https://anaconda.org/conda-forge/pygmo_plugins_nonfree) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/pygmo_plugins_nonfree.svg)](https://anaconda.org/conda-forge/pygmo_plugins_nonfree) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/pygmo_plugins_nonfree.svg)](https://anaconda.org/conda-forge/pygmo_plugins_nonfree) |
 
 Installing pygmo_plugins_nonfree
 ================================

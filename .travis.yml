@@ -8,19 +8,10 @@ osx_image: xcode6.4
 
 env:
   matrix:
-    
-    - CONDA_NPY=111  CONDA_PY=27
-    - CONDA_NPY=112  CONDA_PY=27
-    - CONDA_NPY=113  CONDA_PY=27
-    - CONDA_NPY=114  CONDA_PY=27
-    - CONDA_NPY=111  CONDA_PY=35
-    - CONDA_NPY=112  CONDA_PY=35
-    - CONDA_NPY=113  CONDA_PY=35
-    - CONDA_NPY=114  CONDA_PY=35
-    - CONDA_NPY=111  CONDA_PY=36
-    - CONDA_NPY=112  CONDA_PY=36
-    - CONDA_NPY=113  CONDA_PY=36
-    - CONDA_NPY=114  CONDA_PY=36
+    - CONFIG=osx_python2.7
+    - CONFIG=osx_python3.5
+    - CONFIG=osx_python3.6
+
   global:
     # The BINSTAR_TOKEN secure variable. This is defined canonically in conda-forge.yml.
     - secure: "TDv92Olnkwu/FwinKNi1PzL03PzRjTAK4sCJceEaz0kamqQjH3k5hGtzV7OOkYkAsIHXbF7USoWNTITcE+Tt3CSDrsZDOC8QygVJJKBJ6EhkDkMf0Ce/5n+yIJN+mMHxalR230bdWfStvWATmd4NBu16qKnCAXomBVWo2h0OisochueRSz9F5Uc5dGRu6//CB5cFXU7paKUrMWH0KdLTNeglLI9OI94mEmazzIkTD/dIapLE2dqkdetBJhUqrSa739t+Frc89EnxQQ8dXoEmXLiLxIYTWZm7o3gT51cxjGH3b3PhBy3rYMf0ehbVrFaFDJZxisDaXX//FwOnhUgxxNI7rC9daH8Gqlk6/lxWEheR5m7wANpSAb8wIyBQBoOoXG2Ut6ntPN38Kg1+YTjZURKJJHeRFxUL/coeDWdOQ9kr8Gz92k3Dc1TSFxp1w/axX6xymQxVr0HwXCN75x4eP0Sh7axeS/YN1VtSMqNPOAaObJqXFgNVTSkhyJ7eeTQpru/pQ/grMvT/DscKU+7BnZvap7GZst2Y9St7g31Y2AmF5St/FrA9guhqyxyLMchHQvzTWCt6PfXNsy69nnIp8XYgQJMBCPJ2XWrAlH4COFAHp5FyklDqodpEWqyTdOzHDU/qeYKLIfQAwYImIw+QnIOkXHx+4mRrGPUGTVbJYl4="
@@ -29,7 +20,7 @@ env:
 before_install:
     # Fast finish the PR.
     - |
-      (curl https://raw.githubusercontent.com/conda-forge/conda-forge-build-setup-feedstock/master/recipe/ff_ci_pr_build.py | \
+      (curl https://raw.githubusercontent.com/conda-forge/conda-forge-ci-setup-feedstock/master/recipe/ff_ci_pr_build.py | \
           python - -v --ci "travis" "${TRAVIS_REPO_SLUG}" "${TRAVIS_BUILD_NUMBER}" "${TRAVIS_PULL_REQUEST}") || exit 1
 
     # Remove homebrew.
@@ -61,10 +52,10 @@ install:
       conda config --add channels defaults
       conda config --add channels conda-forge
       conda config --set show_channel_urls true
-      conda install --yes --quiet conda-forge-build-setup
+      conda install --yes --quiet conda-forge-ci-setup=1
       source run_conda_forge_build_setup
 
 script:
-  - conda build ./recipe
+  - conda build ./recipe -m ./.ci_support/${CONFIG}.yaml
 
-  - upload_or_check_non_existence ./recipe conda-forge --channel=main
+  - upload_or_check_non_existence ./recipe conda-forge --channel=main -m ./.ci_support/${CONFIG}.yaml
