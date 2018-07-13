@@ -9,8 +9,8 @@ source:
   sha256: 7feba14ce01ab3fc01434fc7ff976da44b3d46a78b671939fa6ef664ba0c9c50
 
 build:
-  number: 0
-  skip: true  # [(win and py<36) or win32]
+  number: 1
+  skip: True  # [(win and py<36) or win32]
 
 requirements:
   build:
@@ -19,16 +19,16 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
-    - pagmo     2.6
-    - pygmo     2.6
+    - pagmo     2.8
+    - pygmo     2.8
     - boost
     - numpy
     - cloudpickle
     - ipyparallel
     - python
   run:
-    - pagmo     2.6
-    - pygmo     2.6
+    - pagmo     2.8
+    - pygmo     2.8
     - boost
     - {{ pin_compatible('numpy') }}
     - cloudpickle
