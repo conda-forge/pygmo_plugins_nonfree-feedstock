@@ -1,4 +1,4 @@
-{% set version = "0.4.1" %}
+{% set version = "0.5" %}
 
 package:
   name: pygmo_plugins_nonfree
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/esa/pagmo_plugins_nonfree/archive/v{{ version }}.tar.gz
-  sha256: 7feba14ce01ab3fc01434fc7ff976da44b3d46a78b671939fa6ef664ba0c9c50
+  sha256: 8723cd545120bf156833e352ab2ad722cc4406d0963aafaf4dab192235492d0c
 
 build:
   number: 0
