@@ -18,13 +18,13 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
-    - pagmo     2.10
-    - pygmo     2.10
+    - pagmo
+    - pygmo
     - python
     - numpy
   run:
-    - pagmo     2.10
-    - pygmo     2.10
+    - pagmo
+    - pygmo
     - boost
     - {{ pin_compatible('numpy') }}
     - cloudpickle
