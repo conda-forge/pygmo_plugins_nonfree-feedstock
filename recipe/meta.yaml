@@ -1,4 +1,4 @@
-{% set version = "0.8" %}
+{% set version = "0.9" %}
 
 package:
   name: pygmo_plugins_nonfree
@@ -6,10 +6,10 @@ package:
 
 source:
   url: https://github.com/esa/pagmo_plugins_nonfree/archive/v{{ version }}.tar.gz
-  sha256: 3642f45bf9a4e8acb30636e995340c0d33f6d4b6428c9e27e3ff37a071536254
+  sha256: e81ffcb7474af144f636bab85b222a498eaf2bffb4628b760bb819cafe688bef
 
 build:
-  number: 1
+  number: 0
   skip: true  # [(win and py<36) or win32]
 
 requirements:
