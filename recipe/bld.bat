@@ -1,15 +1,27 @@
+mkdir build_cpp
+cd build_cpp
+
+cmake ^
+    -G "NMake Makefiles" ^
+    -DBoost_NO_BOOST_CMAKE=ON ^
+    -DCMAKE_PREFIX_PATH=%LIBRARY_PREFIX% ^
+    -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
+    -DPPNF_CPP=yes ^
+    -DPPNF_BUILD_TESTS=no ^
+    ..
+
+cmake --build . --config Release --target install
+
+cd ..
 mkdir build
 cd build
 
 cmake ^
-    -G "%CMAKE_GENERATOR%" ^
+    -G "NMake Makefiles" ^
+    -DBoost_NO_BOOST_CMAKE=ON ^
     -DCMAKE_PREFIX_PATH=%LIBRARY_PREFIX% ^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
-    -DPAGMO_PLUGINS_NONFREE_BUILD_PYTHON=yes ^
-    -DPAGMO_PLUGINS_NONFREE_BUILD_TESTS=no ^
+    -DPPNF_PYTHON=yes ^
     ..
 
-cmake --build . --config Release
-
 cmake --build . --config Release --target install
-
