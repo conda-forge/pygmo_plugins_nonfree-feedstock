@@ -24,6 +24,7 @@ cmake \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=$PREFIX \
     -DCMAKE_PREFIX_PATH=$PREFIX \
+    -DPPNF_CPP=no \
     -DPPNF_BUILD_PYTHON=yes \
     -DPPNF_BUILD_TESTS=no \
     ..
