@@ -17,7 +17,7 @@ make install
 
 cd ..
 mkdir build
-cd buil
+cd build
 
 cmake \
     -DBoost_NO_BOOST_CMAKE=ON \
