@@ -6,7 +6,7 @@ cmake ^
     -DBoost_NO_BOOST_CMAKE=ON ^
     -DCMAKE_PREFIX_PATH=%LIBRARY_PREFIX% ^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
-    -DPPNF_CPP=yes ^
+    -DPPNF_BUILD_CPP=yes ^
     -DPPNF_BUILD_TESTS=no ^
     ..
 
@@ -21,8 +21,8 @@ cmake ^
     -DBoost_NO_BOOST_CMAKE=ON ^
     -DCMAKE_PREFIX_PATH=%LIBRARY_PREFIX% ^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
-    -DPPNF_CPP=no ^
-    -DPPNF_PYTHON=yes ^
+    -DPPNF_BUILD_CPP=no ^
+    -DPPNF_BUILD_PYTHON=yes ^
     ..
 
 cmake --build . --config Release --target install
