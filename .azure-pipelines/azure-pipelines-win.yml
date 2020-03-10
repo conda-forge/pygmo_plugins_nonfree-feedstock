@@ -10,14 +10,18 @@ jobs:
   strategy:
     maxParallel: 4
     matrix:
-      win_c_compilervs2015cxx_compilervs2015python3.6:
-        CONFIG: win_c_compilervs2015cxx_compilervs2015python3.6
+      win_python3.6.____cpythontarget_platformwin-64:
+        CONFIG: win_python3.6.____cpythontarget_platformwin-64
         CONDA_BLD_PATH: D:\\bld\\
-        UPLOAD_PACKAGES: False
-      win_c_compilervs2015cxx_compilervs2015python3.7:
-        CONFIG: win_c_compilervs2015cxx_compilervs2015python3.7
+        UPLOAD_PACKAGES: True
+      win_python3.7.____cpythontarget_platformwin-64:
+        CONFIG: win_python3.7.____cpythontarget_platformwin-64
         CONDA_BLD_PATH: D:\\bld\\
-        UPLOAD_PACKAGES: False
+        UPLOAD_PACKAGES: True
+      win_python3.8.____cpythontarget_platformwin-64:
+        CONFIG: win_python3.8.____cpythontarget_platformwin-64
+        CONDA_BLD_PATH: D:\\bld\\
+        UPLOAD_PACKAGES: True
   steps:
     # TODO: Fast finish on azure pipelines?
     - script: |
@@ -101,6 +105,7 @@ jobs:
     - script: |
         set "GIT_BRANCH=%BUILD_SOURCEBRANCHNAME%"
         upload_package .\ .\recipe .ci_support\%CONFIG%.yaml
+      displayName: Upload package
       env:
         BINSTAR_TOKEN: $(BINSTAR_TOKEN)
-      condition: not(eq(variables['UPLOAD_PACKAGES'], 'False'))
+      condition: and(succeeded(), not(eq(variables['UPLOAD_PACKAGES'], 'False')))
