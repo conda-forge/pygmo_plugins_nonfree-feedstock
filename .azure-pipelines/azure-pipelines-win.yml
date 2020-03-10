@@ -14,8 +14,12 @@ jobs:
         CONFIG: win_c_compilervs2015cxx_compilervs2015python3.6.____cpython
         CONDA_BLD_PATH: D:\\bld\\
         UPLOAD_PACKAGES: True
-      win_c_compilervs2015cxx_compilervs2015python3.7.____cpython:
-        CONFIG: win_c_compilervs2015cxx_compilervs2015python3.7.____cpython
+      win_c_compilervs2015cxx_compilervs2015python3.7:
+        CONFIG: win_c_compilervs2015cxx_compilervs2015python3.7
+        CONDA_BLD_PATH: D:\\bld\\
+        UPLOAD_PACKAGES: True
+      win_c_compilervs2015cxx_compilervs2015python3.8:
+        CONFIG: win_c_compilervs2015cxx_compilervs2015python3.8
         CONDA_BLD_PATH: D:\\bld\\
         UPLOAD_PACKAGES: True
   steps:

@@ -10,25 +10,22 @@ source:
 
 build:
   number: 0
-  skip: true  # [(win and py<36) or win32]
+  skip: true  # [py<35]
 
 requirements:
   build:
     - cmake
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
+    - {{ compiler('cxx') }}            # [not win]
+    - {{ compiler('c') }}              # [not win]
+    - vs2017_{{ target_platform  }}    # [win]
   host:
-    - pagmo
-    - pygmo
+    - pagmo-devel
+    - pygmo     
+    - numpy    
     - python
-    - numpy
   run:
     - pagmo
-    - pygmo
-    - boost
-    - {{ pin_compatible('numpy') }}
-    - cloudpickle
-    - ipyparallel
+    - pygmo   
     - python
 
 about:
