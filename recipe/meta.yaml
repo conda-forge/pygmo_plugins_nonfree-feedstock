@@ -1,4 +1,4 @@
-{% set version = "0.10" %}
+{% set version = "0.20" %}
 
 package:
   name: pygmo_plugins_nonfree
@@ -6,29 +6,26 @@ package:
 
 source:
   url: https://github.com/esa/pagmo_plugins_nonfree/archive/v{{ version }}.tar.gz
-  sha256: 4c5ccbd5dd66b72f58f3370e61f14e560a3bdc8f68bd53c3136b37d9f60b72ab
+  sha256: 92e5b14db2dd10bbd03b389243124dfb9b7551789206461b871d8a5dec086528
 
 build:
   number: 0
-  skip: true  # [(win and py<36) or win32]
+  skip: true  # [py<35]
 
 requirements:
   build:
     - cmake
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
+    - {{ compiler('cxx') }}            # [not win]
+    - {{ compiler('c') }}              # [not win]
+    - vs2017_{{ target_platform  }}    # [win]
   host:
-    - pagmo
-    - pygmo
+    - pagmo-devel
+    - pygmo     
+    - numpy    
     - python
-    - numpy
   run:
     - pagmo
-    - pygmo
-    - boost
-    - {{ pin_compatible('numpy') }}
-    - cloudpickle
-    - ipyparallel
+    - pygmo   
     - python
 
 about:
