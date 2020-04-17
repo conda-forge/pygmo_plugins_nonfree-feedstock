@@ -23,7 +23,6 @@ requirements:
     - pygmo
     - numpy
     - python
-    - pybind11
   run:
     - pygmo
     - python
