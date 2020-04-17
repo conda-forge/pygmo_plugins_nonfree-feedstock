@@ -1,4 +1,4 @@
-{% set version = "0.20" %}
+{% set version = "0.21" %}
 
 package:
   name: pygmo_plugins_nonfree
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/esa/pagmo_plugins_nonfree/archive/v{{ version }}.tar.gz
-  sha256: 92e5b14db2dd10bbd03b389243124dfb9b7551789206461b871d8a5dec086528
+  sha256: 50dc3c2cf6484d45335c0dc0158a56281bdf567394652940498e9fb0cbad439f
 
 build:
   number: 0
@@ -20,12 +20,11 @@ requirements:
     - vs2017_{{ target_platform  }}    # [win]
   host:
     - pagmo-devel
-    - pygmo     
-    - numpy    
+    - pygmo
+    - numpy
     - python
-    - pybind11
   run:
-    - pygmo   
+    - pygmo
     - python
 
 about:
