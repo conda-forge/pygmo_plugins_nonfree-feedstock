@@ -39,7 +39,7 @@ cmake ^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
     -DPPNF_BUILD_CPP=no ^
     -DPPNF_BUILD_PYTHON=yes ^
-    -Dpybind11_DIR=%PYAUDI_BUILD_DIR%\share\cmake\pybind11\ ^
+    -Dpybind11_DIR=%PPNF_BUILD_DIR%\share\cmake\pybind11\ ^
     ..
 
 cmake --build . --config Release --target install
