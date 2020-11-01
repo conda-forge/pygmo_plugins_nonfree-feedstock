@@ -9,7 +9,7 @@ source:
   sha256: 50dc3c2cf6484d45335c0dc0158a56281bdf567394652940498e9fb0cbad439f
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<35]
 
 requirements:
@@ -17,7 +17,7 @@ requirements:
     - cmake
     - {{ compiler('cxx') }}            # [not win]
     - {{ compiler('c') }}              # [not win]
-    - vs2017_{{ target_platform  }}    # [win]
+    - vs2017_{{ target_platform }}    # [win]
   host:
     - pagmo-devel
     - pygmo
