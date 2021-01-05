@@ -1,4 +1,4 @@
-{% set version = "0.21" %}
+{% set version = "0.22" %}
 
 package:
   name: pygmo_plugins_nonfree
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/esa/pagmo_plugins_nonfree/archive/v{{ version }}.tar.gz
-  sha256: 50dc3c2cf6484d45335c0dc0158a56281bdf567394652940498e9fb0cbad439f
+  sha256: 9333db9105d6c9e0641cca6bae4a03270c66f3bcd9add509cb05543a0a7b13b3
 
 build:
   number: 0
@@ -17,7 +17,7 @@ requirements:
     - cmake
     - {{ compiler('cxx') }}            # [not win]
     - {{ compiler('c') }}              # [not win]
-    - vs2017_{{ target_platform  }}    # [win]
+    - vs2017_{{ target_platform }}    # [win]
   host:
     - pagmo-devel
     - pygmo
