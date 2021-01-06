@@ -23,7 +23,12 @@ requirements:
     - pygmo
     - numpy
     - python
+    - pybind11
+    - pybind11-abi
+    - boost-cpp
   run:
+    - {{ pin_compatible('boost-cpp', max_pin='x.x') }}
+    - {{ pin_compatible('numpy') }}
     - pygmo
     - python
 
