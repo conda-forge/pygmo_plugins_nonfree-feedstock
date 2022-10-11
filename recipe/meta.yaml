@@ -7,9 +7,10 @@ package:
 source:
   url: https://github.com/esa/pagmo_plugins_nonfree/archive/v{{ version }}.tar.gz
   sha256: 9333db9105d6c9e0641cca6bae4a03270c66f3bcd9add509cb05543a0a7b13b3
+  patches: boost_dll.diff
 
 build:
-  number: 4
+  number: 5
   skip: true  # [py<35]
 
 requirements:
