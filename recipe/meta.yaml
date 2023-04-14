@@ -11,7 +11,7 @@ source:
      - boost_dll.diff
 
 build:
-  number: 6
+  number: 7
   skip: true  # [py<35]
 
 requirements:
