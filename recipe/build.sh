@@ -5,7 +5,7 @@ cd build_cpp
 export PPNF_BUILD_DIR=`pwd`
 
 # ppnf (C++)
-cmake \
+cmake ${CMAKE_ARGS} \
     -DBoost_NO_BOOST_CMAKE=ON \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=$PREFIX \
