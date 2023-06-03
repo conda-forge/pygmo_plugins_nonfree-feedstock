@@ -1,4 +1,4 @@
-{% set version = "0.22" %}
+{% set version = "0.24" %}
 
 package:
   name: pygmo_plugins_nonfree
@@ -6,42 +6,46 @@ package:
 
 source:
   url: https://github.com/esa/pagmo_plugins_nonfree/archive/v{{ version }}.tar.gz
-  sha256: 9333db9105d6c9e0641cca6bae4a03270c66f3bcd9add509cb05543a0a7b13b3
+  sha256: 4d54608942dac8cfc83519803f5c14a10993138f0dca06944a44a2b5f7e631a4
   patches:
-     - boost_dll.diff
+    - boost_dll.diff
 
 build:
-  number: 7
-  skip: true  # [py<35]
+  number: 0
+  ignore_run_exports:
+    # pagmo-devel will automatically
+    # put nlopt and ipopt as run dependencies,
+    # but we don't actually need any symbol
+    # from these libraries in pygmo's module.
+    # Thus, remove them from the runtime
+    # requirements.
+    - nlopt
+    - ipopt
 
 requirements:
   build:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - numpy                                  # [build_platform != target_platform]
     - pybind11                               # [build_platform != target_platform]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - cmake
     - make       # [unix]
-    - vs2017_{{ target_platform }}    # [win]
   host:
-    - pagmo-devel
-    - pygmo
-    - numpy
     - python
     - pybind11
     - pybind11-abi
+    - pagmo-devel
     - boost-cpp
   run:
     - {{ pin_compatible('boost-cpp', max_pin='x.x') }}
-    - {{ pin_compatible('numpy') }}
+    - numpy
     - pygmo
     - python
 
 about:
   home: https://github.com/esa/pagmo_plugins_nonfree/
-  license: GPL v3 and LGPL v3
+  license: GPL-3.0-or-later OR LGPL-3.0-or-later
   license_file: COPYING.lgpl3
   summary: A package affiliated to pagmo/pygmo and providing additional solvers in the form of plugins (i.e. loading the third party libraries at run time)
 
