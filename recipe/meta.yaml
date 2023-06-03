@@ -12,30 +12,25 @@ source:
 
 build:
   number: 0
-  skip: true  # [py<35]
 
 requirements:
   build:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - numpy                                  # [build_platform != target_platform]
     - pybind11                               # [build_platform != target_platform]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - cmake
     - make       # [unix]
-    - vs2017_{{ target_platform }}    # [win]
   host:
-    - pagmo-devel
-    - pygmo
-    - numpy
     - python
     - pybind11
     - pybind11-abi
+    - pagmo-devel
     - boost-cpp
   run:
     - {{ pin_compatible('boost-cpp', max_pin='x.x') }}
-    - {{ pin_compatible('numpy') }}
+    - numpy
     - pygmo
     - python
 
