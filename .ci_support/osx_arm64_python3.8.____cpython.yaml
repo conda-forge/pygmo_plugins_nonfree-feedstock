@@ -14,8 +14,12 @@ cxx_compiler:
 - clangxx
 cxx_compiler_version:
 - '15'
+ipopt:
+- 3.14.12
 macos_machine:
 - arm64-apple-darwin20.0.0
+nlopt:
+- '2.7'
 pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x

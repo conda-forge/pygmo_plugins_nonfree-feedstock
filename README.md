@@ -5,7 +5,7 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/pygmo_plugins_n
 
 Home: https://github.com/esa/pagmo_plugins_nonfree/
 
-Package license: GPL v3 and LGPL v3
+Package license: GPL-3.0-or-later OR LGPL-3.0-or-later
 
 Summary: A package affiliated to pagmo/pygmo and providing additional solvers in the form of plugins (i.e. loading the third party libraries at run time)
 
