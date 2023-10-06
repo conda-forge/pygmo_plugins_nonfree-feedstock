@@ -11,7 +11,7 @@ source:
     - boost_dll.diff
 
 build:
-  number: 0
+  number: 1
   ignore_run_exports:
     # pagmo-devel will automatically
     # put nlopt and ipopt as run dependencies,
@@ -36,9 +36,8 @@ requirements:
     - pybind11
     - pybind11-abi
     - pagmo-devel
-    - boost-cpp
+    - libboost-devel
   run:
-    - {{ pin_compatible('boost-cpp', max_pin='x.x') }}
     - numpy
     - pygmo
     - python
