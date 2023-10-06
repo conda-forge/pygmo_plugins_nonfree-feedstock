@@ -8,7 +8,7 @@ source:
   url: https://github.com/esa/pagmo_plugins_nonfree/archive/v{{ version }}.tar.gz
   sha256: 4d54608942dac8cfc83519803f5c14a10993138f0dca06944a44a2b5f7e631a4
   patches:
-    - libboost-python-devel_dll.diff
+    - boost_dll.diff
 
 build:
   number: 1
