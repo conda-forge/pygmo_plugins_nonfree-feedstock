@@ -8,10 +8,10 @@ source:
   url: https://github.com/esa/pagmo_plugins_nonfree/archive/v{{ version }}.tar.gz
   sha256: 4d54608942dac8cfc83519803f5c14a10993138f0dca06944a44a2b5f7e631a4
   patches:
-    - boost_dll.diff
+    - libboost-python-devel_dll.diff
 
 build:
-  number: 0
+  number: 1
   ignore_run_exports:
     # pagmo-devel will automatically
     # put nlopt and ipopt as run dependencies,
@@ -36,9 +36,8 @@ requirements:
     - pybind11
     - pybind11-abi
     - pagmo-devel
-    - boost-cpp
+    - libboost-devel
   run:
-    - {{ pin_compatible('boost-cpp', max_pin='x.x') }}
     - numpy
     - pygmo
     - python
