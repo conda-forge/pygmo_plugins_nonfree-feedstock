@@ -1,4 +1,4 @@
-{% set version = "0.24" %}
+{% set version = "0.25" %}
 
 package:
   name: pygmo_plugins_nonfree
@@ -6,12 +6,12 @@ package:
 
 source:
   url: https://github.com/esa/pagmo_plugins_nonfree/archive/v{{ version }}.tar.gz
-  sha256: 4d54608942dac8cfc83519803f5c14a10993138f0dca06944a44a2b5f7e631a4
+  sha256: 0bc2ee9cee3694bb1ef0eff1c4c8f88c1bb40402e7b6fe343180220a50664054
   patches:
     - boost_dll.diff
 
 build:
-  number: 2
+  number: 0
   ignore_run_exports:
     # pagmo-devel will automatically
     # put nlopt and ipopt as run dependencies,
