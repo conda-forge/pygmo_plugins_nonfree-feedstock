@@ -35,7 +35,7 @@ requirements:
     - pybind11
     - pybind11-abi
     - pagmo-devel
-    - libboost-devel
+    - libboost-devel>=1.86
   run:
     - numpy
     - pygmo
