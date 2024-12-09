@@ -20,6 +20,7 @@ cd build
 cmake ^
     -G "NMake Makefiles" ^
     -DBoost_NO_BOOST_CMAKE=ON ^
+    -DPython3_EXECUTABLE=%PREFIX%\python.exe ^
     -DCMAKE_PREFIX_PATH=%LIBRARY_PREFIX% ^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
     -DPPNF_BUILD_CPP=no ^
