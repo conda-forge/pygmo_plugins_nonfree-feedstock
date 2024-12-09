@@ -26,18 +26,18 @@ requirements:
   build:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - pybind11                               # [build_platform != target_platform]
+    - pybind11 >=2.10                        # [build_platform != target_platform]
     - {{ compiler('c') }}
     - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
-    - cmake
+    - cmake >=3.18
     - make       # [unix]
   host:
     - python
-    - pybind11
+    - pybind11 >=2.10
     - pybind11-abi
-    - pagmo-devel
-    - libboost-devel >=1.86
+    - pagmo-devel =2.19.*
+    - libboost-devel
   run:
     - numpy
     - pygmo
