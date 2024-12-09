@@ -1,13 +1,14 @@
 diff --git a/pygmo_plugins_nonfree/CMakeLists.txt b/pygmo_plugins_nonfree/CMakeLists.txt
-index 84a0f85..59d6f53 100644
+index 5a254ca..dbccb54 100644
 --- a/pygmo_plugins_nonfree/CMakeLists.txt
 +++ b/pygmo_plugins_nonfree/CMakeLists.txt
-@@ -10,7 +10,7 @@ Python3_add_library(core MODULE WITH_SOABI
+@@ -10,7 +10,8 @@ Python3_add_library(core MODULE WITH_SOABI
      docstrings.cpp
  )
  
--target_link_libraries(core PRIVATE pagmo_plugins_nonfree Boost::boost)
-+target_link_libraries(core PRIVATE pagmo_plugins_nonfree Boost::boost Pagmo::pagmo)
+-target_link_libraries(core PRIVATE pagmo_plugins_nonfree)
++target_link_libraries(core PRIVATE pagmo_plugins_nonfree Pagmo::pagmo Boost::Boost
++)
  target_link_libraries(core PRIVATE "${pybind11_LIBRARIES}")
  
  target_include_directories(core SYSTEM PRIVATE "${pybind11_INCLUDE_DIR}" "${Python3_INCLUDE_DIRS}")
