@@ -7,7 +7,7 @@ index 5a254ca..dbccb54 100644
  )
  
 -target_link_libraries(core PRIVATE pagmo_plugins_nonfree)
-+target_link_libraries(core PRIVATE pagmo_plugins_nonfree Pagmo::pagmo Boost::boost
++target_link_libraries(core PRIVATE Pagmo_plugins_nonfree::pagmo_plugins_nonfree Pagmo::pagmo Boost::boost
 +)
  target_link_libraries(core PRIVATE "${pybind11_LIBRARIES}")
  
