@@ -3,7 +3,7 @@ cd build_cpp
 SET PPNF_BUILD_DIR=%cd%
 
 cmake ^
-    -G "NMake Makefiles" ^
+    -G "Visual Studio 17 2022" -A x64 ^
     -DBoost_NO_BOOST_CMAKE=ON ^
     -DCMAKE_PREFIX_PATH=%LIBRARY_PREFIX% ^
     -DCMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% ^
@@ -18,7 +18,7 @@ mkdir build
 cd build
 
 cmake ^
-    -G "NMake Makefiles" ^
+    -G "Visual Studio 17 2022" -A x64 ^
     -DBoost_NO_BOOST_CMAKE=ON ^
     -DPython3_EXECUTABLE=%PREFIX%\python.exe ^
     -DCMAKE_PREFIX_PATH=%LIBRARY_PREFIX% ^
