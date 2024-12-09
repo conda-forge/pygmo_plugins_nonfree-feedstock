@@ -1,14 +1,27 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index f0feffb..a0ad54a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -146,6 +146,9 @@ if(PPNF_BUILD_PYTHON)
+     # pybind11.
+     find_package(pybind11 REQUIRED)
+ 
++    # pagmo_plugins_nonfree.
++    find_package(pagmo_plugins_nonfree REQUIRED)
++
+     # Build directory
+     add_subdirectory("${CMAKE_SOURCE_DIR}/pygmo_plugins_nonfree")
+ 
 diff --git a/pygmo_plugins_nonfree/CMakeLists.txt b/pygmo_plugins_nonfree/CMakeLists.txt
-index 5a254ca..dbccb54 100644
+index 5a254ca..77c6475 100644
 --- a/pygmo_plugins_nonfree/CMakeLists.txt
 +++ b/pygmo_plugins_nonfree/CMakeLists.txt
-@@ -10,7 +10,8 @@ Python3_add_library(core MODULE WITH_SOABI
+@@ -10,7 +10,7 @@ Python3_add_library(core MODULE WITH_SOABI
      docstrings.cpp
  )
  
 -target_link_libraries(core PRIVATE pagmo_plugins_nonfree)
-+target_link_libraries(core PRIVATE Pagmo_plugins_nonfree::pagmo_plugins_nonfree Pagmo::pagmo Boost::boost
-+)
++target_link_libraries(core PRIVATE Pagmo_plugins_nonfree::pagmo_plugins_nonfree Pagmo::pagmo Boost::boost)
  target_link_libraries(core PRIVATE "${pybind11_LIBRARIES}")
  
  target_include_directories(core SYSTEM PRIVATE "${pybind11_INCLUDE_DIR}" "${Python3_INCLUDE_DIRS}")
