@@ -24,12 +24,12 @@ cd build_python
 
 cmake \
     -DBoost_NO_BOOST_CMAKE=ON \
+    -DPython3_EXECUTABLE=$PREFIX/bin/python \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=$PREFIX \
     -DCMAKE_PREFIX_PATH=$PREFIX \
     -DPPNF_BUILD_CPP=no \
     -DPPNF_BUILD_PYTHON=yes \
-    -DPPNF_BUILD_TESTS=no \
     ..
 
 make -j${CPU_COUNT} VERBOSE=1
