@@ -179,7 +179,7 @@ Current release info
 
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-pygmo_plugins_nonfree-green.svg)](https://anaconda.org/conda-forge/pygmo_plugins_nonfree) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/pygmo_plugins_nonfree.svg)](https://anaconda.org/conda-forge/pygmo_plugins_nonfree) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/pygmo_plugins_nonfree.svg)](https://anaconda.org/conda-forge/pygmo_plugins_nonfree) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/pygmo_plugins_nonfree.svg)](https://anaconda.org/conda-forge/pygmo_plugins_nonfree) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-pygmo__plugins__nonfree-green.svg)](https://anaconda.org/conda-forge/pygmo_plugins_nonfree) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/pygmo_plugins_nonfree.svg)](https://anaconda.org/conda-forge/pygmo_plugins_nonfree) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/pygmo_plugins_nonfree.svg)](https://anaconda.org/conda-forge/pygmo_plugins_nonfree) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/pygmo_plugins_nonfree.svg)](https://anaconda.org/conda-forge/pygmo_plugins_nonfree) |
 
 Installing pygmo_plugins_nonfree
 ================================
