@@ -3,31 +3,36 @@ set -euxo pipefail
 
 cd "${SRC_DIR}"
 
-# Find any sysroot-ish directory under BUILD_PREFIX
-for sysroot in $(find "${BUILD_PREFIX}" -type d -path "*/sysroot*" 2>/dev/null || true); do
-  if [[ -d "${sysroot}/usr" ]]; then
-    root="${sysroot}"
-  else
-    # if we matched something deeper (e.g. .../sysroot/usr), normalize upward
-    root="${sysroot%%/usr*}"
-  fi
-
+# Only consider the actual sysroot dir (not every subdir containing "sysroot")
+for root in $(find "${BUILD_PREFIX}" -type d -path "*/sysroot" 2>/dev/null || true); do
   if [[ ! -e "${root}/usr/lib/libm.so" ]]; then
     mkdir -p "${root}/usr/lib"
-    for cand in \
+
+    # First try a few common locations
+    cand=""
+    for p in \
       "${root}/usr/lib64/libm.so.6" \
       "${root}/lib64/libm.so.6" \
       "${root}/usr/lib/x86_64-linux-gnu/libm.so.6" \
       "${root}/usr/lib/libm.so.6"
     do
-      if [[ -e "${cand}" ]]; then
-        ln -s "${cand}" "${root}/usr/lib/libm.so"
+      if [[ -e "${p}" ]]; then
+        cand="${p}"
         break
       fi
     done
+
+    # Fallback: locate libm.so.6 anywhere under this sysroot
+    if [[ -z "${cand}" ]]; then
+      cand="$(find "${root}" -type f -name 'libm.so.6' -print -quit 2>/dev/null || true)"
+    fi
+
+    # Create the symlink if we found a candidate
+    if [[ -n "${cand}" ]]; then
+      ln -sf "${cand}" "${root}/usr/lib/libm.so"
+    fi
   fi
 done
-
 
 cmake -S . -B build_cpp ${CMAKE_ARGS} \
   -DPPNF_BUILD_CPP=ON \
