@@ -4,9 +4,18 @@ mkdir build_cpp
 cd build_cpp
 export PPNF_BUILD_DIR=`pwd`
 
+# Work around missing libm.so in conda-forge sysroot layout (linux build)
+if [[ -n "${CONDA_BUILD_SYSROOT:-}" ]]; then
+  if [[ ! -e "${CONDA_BUILD_SYSROOT}/usr/lib/libm.so" && -e "${CONDA_BUILD_SYSROOT}/lib64/libm.so.6" ]]; then
+    ln -s "${CONDA_BUILD_SYSROOT}/lib64/libm.so.6" "${CONDA_BUILD_SYSROOT}/usr/lib/libm.so"
+  fi
+  if [[ ! -e "${CONDA_BUILD_SYSROOT}/usr/lib/libm.so" && -e "${CONDA_BUILD_SYSROOT}/usr/lib64/libm.so.6" ]]; then
+    ln -s "${CONDA_BUILD_SYSROOT}/usr/lib64/libm.so.6" "${CONDA_BUILD_SYSROOT}/usr/lib/libm.so"
+  fi
+fi
+
 # ppnf (C++)
 cmake ${CMAKE_ARGS} \
-    -DBoost_NO_BOOST_CMAKE=ON \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=$PREFIX \
     -DCMAKE_PREFIX_PATH=$PREFIX \
@@ -23,7 +32,6 @@ mkdir build_python
 cd build_python
 
 cmake \
-    -DBoost_NO_BOOST_CMAKE=ON \
     -DPython3_EXECUTABLE=$PREFIX/bin/python \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=$PREFIX \
