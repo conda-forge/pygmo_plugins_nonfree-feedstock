@@ -1,18 +1,25 @@
 #!/usr/bin/env bash
+set -euxo pipefail
 
-mkdir build_cpp
-cd build_cpp
-export PPNF_BUILD_DIR=`pwd`
-
-# Work around missing libm.so in conda-forge sysroot layout (linux build)
-if [[ -n "${CONDA_BUILD_SYSROOT:-}" ]]; then
-  if [[ ! -e "${CONDA_BUILD_SYSROOT}/usr/lib/libm.so" && -e "${CONDA_BUILD_SYSROOT}/lib64/libm.so.6" ]]; then
-    ln -s "${CONDA_BUILD_SYSROOT}/lib64/libm.so.6" "${CONDA_BUILD_SYSROOT}/usr/lib/libm.so"
+# Satisfy brittle exported link interface that references an absolute .../sysroot/usr/lib/libm.so
+# Search any sysroot in the current build prefix tree and create usr/lib/libm.so if missing.
+for sysroot in $(find "${BUILD_PREFIX}" -path "*/sysroot" -type d 2>/dev/null || true); do
+  if [[ ! -e "${sysroot}/usr/lib/libm.so" ]]; then
+    mkdir -p "${sysroot}/usr/lib"
+    # Try common locations for the real SONAME
+    for cand in \
+      "${sysroot}/usr/lib64/libm.so.6" \
+      "${sysroot}/lib64/libm.so.6" \
+      "${sysroot}/usr/lib/x86_64-linux-gnu/libm.so.6" \
+      "${sysroot}/usr/lib/libm.so.6"
+    do
+      if [[ -e "$cand" ]]; then
+        ln -s "$cand" "${sysroot}/usr/lib/libm.so"
+        break
+      fi
+    done
   fi
-  if [[ ! -e "${CONDA_BUILD_SYSROOT}/usr/lib/libm.so" && -e "${CONDA_BUILD_SYSROOT}/usr/lib64/libm.so.6" ]]; then
-    ln -s "${CONDA_BUILD_SYSROOT}/usr/lib64/libm.so.6" "${CONDA_BUILD_SYSROOT}/usr/lib/libm.so"
-  fi
-fi
+done
 
 # ppnf (C++)
 cmake ${CMAKE_ARGS} \
