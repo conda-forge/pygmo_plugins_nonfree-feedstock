@@ -3,22 +3,31 @@ set -euxo pipefail
 
 cd "${SRC_DIR}"
 
-for sysroot in $(find "${BUILD_PREFIX}" -path "*/sysroot" -type d 2>/dev/null || true); do
-  if [[ ! -e "${sysroot}/usr/lib/libm.so" ]]; then
-    mkdir -p "${sysroot}/usr/lib"
+# Find any sysroot-ish directory under BUILD_PREFIX
+for sysroot in $(find "${BUILD_PREFIX}" -type d -path "*/sysroot*" 2>/dev/null || true); do
+  if [[ -d "${sysroot}/usr" ]]; then
+    root="${sysroot}"
+  else
+    # if we matched something deeper (e.g. .../sysroot/usr), normalize upward
+    root="${sysroot%%/usr*}"
+  fi
+
+  if [[ ! -e "${root}/usr/lib/libm.so" ]]; then
+    mkdir -p "${root}/usr/lib"
     for cand in \
-      "${sysroot}/usr/lib64/libm.so.6" \
-      "${sysroot}/lib64/libm.so.6" \
-      "${sysroot}/usr/lib/x86_64-linux-gnu/libm.so.6" \
-      "${sysroot}/usr/lib/libm.so.6"
+      "${root}/usr/lib64/libm.so.6" \
+      "${root}/lib64/libm.so.6" \
+      "${root}/usr/lib/x86_64-linux-gnu/libm.so.6" \
+      "${root}/usr/lib/libm.so.6"
     do
       if [[ -e "${cand}" ]]; then
-        ln -s "${cand}" "${sysroot}/usr/lib/libm.so"
+        ln -s "${cand}" "${root}/usr/lib/libm.so"
         break
       fi
     done
   fi
 done
+
 
 cmake -S . -B build_cpp ${CMAKE_ARGS} \
   -DPPNF_BUILD_CPP=ON \
