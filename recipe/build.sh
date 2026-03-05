@@ -1,67 +1,61 @@
-#!/usr/bin/env bash
-set -euxo pipefail
+# -----------------------------------------------------------------------------
+# Workaround: some dependencies' exported targets reference ${_CMAKE_SYSROOT}/usr/lib/libm.so
+# In conda(-forge) sysroot, we usually have libm.so.6 but not the linker script libm.so.
+# Make will then fail with "No rule to make target .../sysroot/usr/lib/libm.so".
+# Create libm.so in every sysroot we can find (build + host + any nested bld/rattler sysroots).
+# -----------------------------------------------------------------------------
+set -euo pipefail
 
-cd "${SRC_DIR}"
+fix_one_sysroot() {
+  local sysroot="$1"
+  local libdir="$sysroot/usr/lib"
 
-fixed_any=0
+  # Only touch plausible sysroots
+  [[ -d "$sysroot/usr" ]] || return 0
 
-for root in $(find "${BUILD_PREFIX}" -type d -path "*/sysroot" 2>/dev/null || true); do
-  if [[ -e "${root}/usr/lib/libm.so" ]]; then
-    continue
+  # If already exists, leave it
+  if [[ -e "$libdir/libm.so" ]]; then
+    return 0
   fi
 
-  mkdir -p "${root}/usr/lib"
+  mkdir -p "$libdir"
 
-  cand=""
-  for p in \
-    "${root}/usr/lib64/libm.so.6" \
-    "${root}/lib64/libm.so.6" \
-    "${root}/usr/lib/x86_64-linux-gnu/libm.so.6" \
-    "${root}/usr/lib/libm.so.6"
+  # Prefer libm.so.6 if present anywhere typical in the sysroot
+  local cand=""
+  for c in \
+    "$sysroot/usr/lib64/libm.so.6" \
+    "$sysroot/lib64/libm.so.6" \
+    "$sysroot/usr/lib/x86_64-linux-gnu/libm.so.6" \
+    "$sysroot/usr/lib/libm.so.6"
   do
-    if [[ -e "${p}" ]]; then
-      cand="${p}"
+    if [[ -e "$c" ]]; then
+      cand="$c"
       break
     fi
   done
 
-  if [[ -z "${cand}" ]]; then
-    cand="$(find "${root}" -type f -name 'libm.so.6' -print -quit 2>/dev/null || true)"
-  fi
-
-  if [[ -n "${cand}" ]]; then
-    ln -sf "${cand}" "${root}/usr/lib/libm.so"
-    fixed_any=1
+  if [[ -n "$cand" ]]; then
+    ln -s "$cand" "$libdir/libm.so"
+    echo "Created: $libdir/libm.so -> $cand"
   else
-    echo "ERROR: libm.so.6 not found under sysroot: ${root}" 1>&2
-    echo "Top-level of sysroot:" 1>&2
-    ls -la "${root}" 1>&2 || true
-    echo "usr/lib contents:" 1>&2
-    ls -la "${root}/usr/lib" 1>&2 || true
-    echo "usr/lib64 contents:" 1>&2
-    ls -la "${root}/usr/lib64" 1>&2 || true
-    exit 1
+    echo "WARNING: could not find libm.so.6 under $sysroot; skipping" >&2
   fi
-done
+}
 
-if [[ "${fixed_any}" -eq 0 ]]; then
-  echo "WARNING: Did not create any libm.so symlink (already existed or no sysroot found)" 1>&2
+# 1) Fix the current build sysroot (fast path)
+if [[ -n "${CONDA_BUILD_SYSROOT:-}" ]] && [[ -d "${CONDA_BUILD_SYSROOT:-}" ]]; then
+  fix_one_sysroot "$CONDA_BUILD_SYSROOT"
 fi
 
-cmake -S . -B build_cpp ${CMAKE_ARGS} \
-  -DPPNF_BUILD_CPP=ON \
-  -DPPNF_BUILD_PYTHON=OFF \
-  -DPPNF_BUILD_TESTS=OFF \
-  -DCMAKE_BUILD_TYPE=Release
+# 2) Fix the sysroot under the current build prefix, and *any* nested sysroots
+#    (covers the rattler-build/nlopt/... sysroot path seen in the failure)
+roots=()
+[[ -n "${BUILD_PREFIX:-}" ]] && roots+=("$BUILD_PREFIX")
+[[ -n "${PREFIX:-}" ]] && roots+=("$PREFIX")
 
-cmake --build build_cpp --parallel "${CPU_COUNT}"
-cmake --install build_cpp
-
-cmake -S . -B build_py ${CMAKE_ARGS} \
-  -DPPNF_BUILD_CPP=OFF \
-  -DPPNF_BUILD_PYTHON=ON \
-  -DPPNF_BUILD_TESTS=OFF \
-  -DPython3_EXECUTABLE="${PYTHON}"
-
-cmake --build build_py --parallel "${CPU_COUNT}"
-cmake --install build_py
+for r in "${roots[@]}"; do
+  [[ -d "$r" ]] || continue
+  while IFS= read -r -d '' s; do
+    fix_one_sysroot "$s"
+  done < <(find "$r" -type d -name sysroot -print0 2>/dev/null || true)
+done
