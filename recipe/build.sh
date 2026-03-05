@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Patch pagmo-devel's CMake config to remove the stale rattler-build sysroot libm path
+find "${PREFIX}/lib/cmake" -name "*.cmake" -exec \
+  sed -i 's|[^ ]*rattler-build[^ ]*/sysroot/usr/lib/libm\.so|-lm|g' {} +
+
 # ---- C++ build ----
 cmake -S . -B build_cpp ${CMAKE_ARGS:-} \
   -DPPNF_BUILD_CPP=ON \
