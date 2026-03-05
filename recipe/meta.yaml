@@ -7,8 +7,6 @@ package:
 source:
   url: https://github.com/esa/pagmo_plugins_nonfree/archive/v{{ version }}.tar.gz
   sha256: 60a932525addb87d51cc86ffe18e48c3f3555079c955a319940ce3cb2dac6166
-  patches:
-    - add_pagmo.diff
 
 build:
   number: 0
