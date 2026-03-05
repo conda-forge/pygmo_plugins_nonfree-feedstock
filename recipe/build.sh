@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 set -euo pipefail
 
 # ---- libm.so sysroot workaround (see earlier message) ----
