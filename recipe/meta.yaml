@@ -1,4 +1,4 @@
-{% set version = "0.26" %}
+{% set version = "0.27" %}
 
 package:
   name: pygmo_plugins_nonfree
@@ -6,12 +6,12 @@ package:
 
 source:
   url: https://github.com/esa/pagmo_plugins_nonfree/archive/v{{ version }}.tar.gz
-  sha256: 3113c3b6b15d9f2181c52750ccc77f942b4d2150fc62683207587141993d4a52
+  sha256: 60a932525addb87d51cc86ffe18e48c3f3555079c955a319940ce3cb2dac6166
   patches:
     - add_pagmo.diff
 
 build:
-  number: 6
+  number: 0
   ignore_run_exports:
     # pagmo-devel will automatically
     # put nlopt and ipopt as run dependencies,
@@ -46,7 +46,7 @@ requirements:
 about:
   home: https://github.com/esa/pagmo_plugins_nonfree/
   license: GPL-3.0-or-later OR LGPL-3.0-or-later
-  license_file: COPYING.lgpl3 
+  license_file: COPYING.lgpl3
   summary: A package affiliated to pagmo/pygmo and providing additional solvers in the form of plugins (i.e. loading the third party libraries at run time)
 
 extra:
