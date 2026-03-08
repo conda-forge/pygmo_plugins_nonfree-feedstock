@@ -29,14 +29,14 @@ requirements:
     - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
     - cmake >=3.18
-    - nlopt < 2.10.1
+    - nlopt <2.10.1
     - make       # [unix]
   host:
     - python
     - pybind11 >=2.10
     - pybind11-abi
     - pagmo-devel =2.19.*
-    - nlopt < 2.10.1
+    - nlopt <2.10.1
     - ipopt
     - libboost-devel
   run:
