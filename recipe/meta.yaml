@@ -9,7 +9,7 @@ source:
   sha256: 60a932525addb87d51cc86ffe18e48c3f3555079c955a319940ce3cb2dac6166
 
 build:
-  number: 0
+  number: 1
   ignore_run_exports:
     # pagmo-devel will automatically
     # put nlopt and ipopt as run dependencies,
