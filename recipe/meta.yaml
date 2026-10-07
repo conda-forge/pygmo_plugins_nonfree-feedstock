@@ -2,7 +2,7 @@
 
 package:
   name: pygmo_plugins_nonfree
-  version: {{ version }}
+  version: "{{ version }}"
 
 source:
   url: https://github.com/esa/pagmo_plugins_nonfree/archive/v{{ version }}.tar.gz
@@ -29,17 +29,17 @@ requirements:
     - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
     - cmake >=3.18
-    - nlopt <2.10.1
+    - nlopt
     - make       # [unix]
   host:
     - python
     - pybind11 >=2.10
     - pybind11-abi
     - pagmo-devel =2.19.*
-    - nlopt <2.10.1
+    - nlopt
     - ipopt
     - libboost-devel
-    - eigen >=3.3
+    - eigen <4
   run:
     - numpy
     - pygmo
