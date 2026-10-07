@@ -1,0 +1,16 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index c8d9779..159f7ae 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -216 +216,4 @@ if(PPNF_BUILD_CPP)
+-    target_link_libraries(pagmo_plugins_nonfree PUBLIC Boost::boost Boost::serialization Boost::disable_autolinking Boost::system Boost::filesystem)
++    target_link_libraries(pagmo_plugins_nonfree PUBLIC Boost::boost Boost::serialization Boost::disable_autolinking Boost::filesystem)
++    if(TARGET Boost::system)
++        target_link_libraries(pagmo_plugins_nonfree PUBLIC Boost::system)
++    endif()
+@@ -251 +254,4 @@ if(PPNF_BUILD_CPP)
+-            target_link_libraries(pagmo_plugins_nonfree_static PUBLIC Boost::boost Boost::serialization Boost::disable_autolinking Boost::system Boost::filesystem)
++            target_link_libraries(pagmo_plugins_nonfree_static PUBLIC Boost::boost Boost::serialization Boost::disable_autolinking Boost::filesystem)
++            if(TARGET Boost::system)
++                target_link_libraries(pagmo_plugins_nonfree_static PUBLIC Boost::system)
++            endif()

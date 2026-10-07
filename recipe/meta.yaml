@@ -2,11 +2,13 @@
 
 package:
   name: pygmo_plugins_nonfree
-  version: {{ version }}
+  version: "{{ version }}"
 
 source:
   url: https://github.com/esa/pagmo_plugins_nonfree/archive/v{{ version }}.tar.gz
   sha256: 60a932525addb87d51cc86ffe18e48c3f3555079c955a319940ce3cb2dac6166
+  patches:
+    - boost-system-optional-v027-clean.patch
 
 build:
   number: 2
