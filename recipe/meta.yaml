@@ -39,6 +39,7 @@ requirements:
     - nlopt <2.10.1
     - ipopt
     - libboost-devel
+    - eigen >=3.3
   run:
     - numpy
     - pygmo
