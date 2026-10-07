@@ -21,11 +21,11 @@ cxx_compiler_version:
 ipopt:
 - 3.14.19
 libboost_devel:
-- '1.88'
+- '1.90'
 macos_machine:
 - arm64-apple-darwin20.0.0
 nlopt:
-- '2.10'
+- '2.11'
 pin_run_as_build:
   python:
     min_pin: x.x
