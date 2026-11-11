@@ -9,7 +9,7 @@ channel_targets:
 cxx_compiler:
 - vs2022
 ipopt:
-- 3.14.19
+- 3.14.20
 libboost_devel:
 - '1.90'
 nlopt:
@@ -24,6 +24,3 @@ python:
 - 3.14.* *_cp314
 target_platform:
 - win-64
-zip_keys:
-- - python
-  - channel_sources
